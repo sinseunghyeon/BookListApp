@@ -28,6 +28,8 @@
 		FFAFF3EB2BEAAB3F004C5C8D /* WishListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFAFF3E92BEAAB3F004C5C8D /* WishListView.xib */; };
 		FFAFF3EE2BEAABF3004C5C8D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF3EC2BEAABF3004C5C8D /* MainTabBarController.swift */; };
 		FFAFF3EF2BEAABF3004C5C8D /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFAFF3ED2BEAABF3004C5C8D /* MainTabBarController.xib */; };
+		FFAFF3F22BEAB6B8004C5C8D /* SearchListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF3F02BEAB6B8004C5C8D /* SearchListViewCell.swift */; };
+		FFAFF3F32BEAB6B8004C5C8D /* SearchListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFAFF3F12BEAB6B8004C5C8D /* SearchListViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		FFAFF3E92BEAAB3F004C5C8D /* WishListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishListView.xib; sourceTree = "<group>"; };
 		FFAFF3EC2BEAABF3004C5C8D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FFAFF3ED2BEAABF3004C5C8D /* MainTabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
+		FFAFF3F02BEAB6B8004C5C8D /* SearchListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewCell.swift; sourceTree = "<group>"; };
+		FFAFF3F12BEAB6B8004C5C8D /* SearchListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchListViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 				FFAFF3E92BEAAB3F004C5C8D /* WishListView.xib */,
 				FFAFF3EC2BEAABF3004C5C8D /* MainTabBarController.swift */,
 				FFAFF3ED2BEAABF3004C5C8D /* MainTabBarController.xib */,
+				FFAFF3F02BEAB6B8004C5C8D /* SearchListViewCell.swift */,
+				FFAFF3F12BEAB6B8004C5C8D /* SearchListViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 				FFAFF3BE2BEA04A2004C5C8D /* Assets.xcassets in Resources */,
 				FFAFF3EB2BEAAB3F004C5C8D /* WishListView.xib in Resources */,
 				FFAFF3E52BEA466D004C5C8D /* ImageViewCell.xib in Resources */,
+				FFAFF3F32BEAB6B8004C5C8D /* SearchListViewCell.xib in Resources */,
 				FFAFF3C12BEA04A2004C5C8D /* Base in Resources */,
 				FFAFF3BC2BEA04A0004C5C8D /* Base in Resources */,
 				FFAFF3E12BEA0B83004C5C8D /* CollectionViewCell.xib in Resources */,
@@ -224,6 +231,7 @@
 				FFAFF3E02BEA0B83004C5C8D /* CollectionViewCell.swift in Sources */,
 				FFAFF3CC2BEA054A004C5C8D /* BookData.swift in Sources */,
 				FFAFF3E42BEA466D004C5C8D /* ImageViewCell.swift in Sources */,
+				FFAFF3F22BEAB6B8004C5C8D /* SearchListViewCell.swift in Sources */,
 				FFAFF3E72BEAA391004C5C8D /* State.swift in Sources */,
 				FFAFF3B72BEA04A0004C5C8D /* SceneDelegate.swift in Sources */,
 				FFAFF3EA2BEAAB3F004C5C8D /* WishListView.swift in Sources */,

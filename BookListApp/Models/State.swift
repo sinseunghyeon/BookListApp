@@ -10,5 +10,4 @@ import Foundation
 enum State {
     case recentTappedBooks
     case searchResultBooks
-    case `default`
 }

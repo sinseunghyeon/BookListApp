@@ -18,6 +18,19 @@ class ViewController: UICollectionViewController {
         self.configureCollectionView()
         self.navigationItem.title = "BookListApp"
         self.configureSearchBar()
+        self.configureNavigationBar()
+    }
+    
+    private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()  // 불투명으로
+        
+        navigationController?.navigationBar.tintColor = .systemGray6
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        title = "Main"
     }
     
     private func configureSearchBar() {
@@ -71,7 +84,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: height)
         case 1:
             let width = collectionView.frame.width - 16
-            let height = collectionView.frame.height / 2
+            let height = collectionView.frame.height / 1.7
             print(collectionView.frame.height)
             return CGSize(width: width, height: height)
         default:
