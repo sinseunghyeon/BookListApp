@@ -18,28 +18,14 @@ class ViewController: UICollectionViewController {
     
     let searchBar = UISearchBar()
     var state: searchState = .default
+    let mainViewModel = MainViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureCollectionView()
         self.configureSearchBar()
         self.configureNavigationBar()
-        self.executeNetwork(keyword: "베스트셀러")
-    }
-    
-    func executeNetwork(keyword: String) {
-        NetworkManager.shared.fetchBookList(keyword: keyword, completion: { result in
-            switch result {
-            case .success(let bookData):
-                NetworkManager.bookList = bookData
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-            
-        })
+        NetworkManager.shared.executeNetwork(keyword: "베스트셀러", collectionView: collectionView)
     }
     
     private func configureNavigationBar() {
@@ -93,7 +79,6 @@ class ViewController: UICollectionViewController {
         cell.delegate = self
         return cell
     }
-
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
@@ -120,10 +105,13 @@ extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NetworkManager.searchDebounceTimer?.invalidate()
         NetworkManager.searchDebounceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
             if searchText.isEmpty {
-                self?.state = .default
+                self.state = .default
             } else {
-                self?.executeNetwork(keyword: searchText)
+                NetworkManager.shared.executeNetwork(keyword: searchText, collectionView: self.collectionView)
             }
         })
     }
@@ -134,15 +122,22 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         self.state = .default
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder() // 사용자가 검색 버튼을 누르면 키보드를 숨깁니다.
     }
 }
 
 extension ViewController: CollectionViewCellDelegate {
     func didSelectItemAt(_ cell: CollectionViewCell, indexPath: IndexPath) {
         let detailVC = DetailView()
+        MainViewModel.indexPathRow = indexPath.row
         detailVC.titleLabel.text = NetworkManager.bookList[indexPath.row].title
         detailVC.authorLabel.text = NetworkManager.bookList[indexPath.row].authors.first
+        NetworkManager.shared.excuteKingFisher(url: NetworkManager.bookList[indexPath.row].thumbnail, imageView: detailVC.imageView)
         detailVC.priceLabel.text = "\(NetworkManager.bookList[indexPath.row].price)원"
         detailVC.descriptionLabel.text = NetworkManager.bookList[indexPath.row].contents
         detailVC.descriptionLabel.sizeToFit()

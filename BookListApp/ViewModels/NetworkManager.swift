@@ -6,7 +6,8 @@
 //
 
 import Alamofire
-import Foundation
+import Kingfisher
+import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -30,16 +31,55 @@ class NetworkManager {
         }
     }
     
-    func executeNetwork(keyword: String) {
+    func executeNetwork(keyword: String, collectionView: UICollectionView) {
         NetworkManager.shared.fetchBookList(keyword: keyword, completion: { result in
             switch result {
             case .success(let bookData):
                 NetworkManager.bookList = bookData
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
             case .failure(let error):
                 print(error)
             }
-            
         })
+    }
+    
+    func fetchThumnailImage(url: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: url) else {
+            print("Invalid URL")
+            DispatchQueue.main.async {
+                completion(UIImage(named: "NoImage"))
+            }
+            return
+        }
+        KingfisherManager.shared.retrieveImage(with: url, options: nil, progressBlock: nil) { result in
+            switch result {
+            case .success(let value):
+                // 이미지 다운로드 성공, UIImage 반환
+                DispatchQueue.main.async {
+                    completion(value.image)
+                }
+            case .failure(let error):
+                // 이미지 다운로드 실패
+                print("Error downloading image: \(error)")
+                DispatchQueue.main.async {
+                    completion(UIImage(named: "NoImage"))
+                }
+            }
+        }
+    }
+    
+    func excuteKingFisher(url: String, imageView: UIImageView) {
+        NetworkManager.shared.fetchThumnailImage(url: url) { image in
+            DispatchQueue.main.async {
+                if let downloadedImage = image {
+                    imageView.image = downloadedImage
+                } else {
+                    print("Image download failed")
+                }
+            }
+        }
     }
     
 }

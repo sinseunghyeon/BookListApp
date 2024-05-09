@@ -8,5 +8,5 @@
 import Foundation
 
 class MainViewModel {
-    
+    static var indexPathRow: Int = 0
 }

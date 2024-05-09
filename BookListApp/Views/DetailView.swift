@@ -14,8 +14,9 @@ class DetailView: UIViewController {
     let imageView = UIImageView()
     let priceLabel = UILabel()
     let descriptionLabel = UILabel()
-    let xButton = UIButton()
+    let backButton = UIButton()
     let addButton = UIButton()
+    let scrollView = UIScrollView()
     let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
 
@@ -26,9 +27,11 @@ class DetailView: UIViewController {
     }
     
     private func configureDetailView() {
-        view.addSubview(verticalStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(verticalStackView)
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
+        verticalStackView.spacing = 10
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(authorLabel)
         verticalStackView.addArrangedSubview(imageView)
@@ -36,6 +39,7 @@ class DetailView: UIViewController {
         verticalStackView.addArrangedSubview(descriptionLabel)
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textAlignment = .center
+        imageView.contentMode = .scaleAspectFit
         authorLabel.font = .systemFont(ofSize: 15)
         authorLabel.textAlignment = .center
         priceLabel.font = .systemFont(ofSize: 18)
@@ -48,28 +52,46 @@ class DetailView: UIViewController {
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fillEqually
         horizontalStackView.spacing = 8
-        horizontalStackView.addArrangedSubview(xButton)
+        horizontalStackView.addArrangedSubview(backButton)
         horizontalStackView.addArrangedSubview(addButton)
-        xButton.backgroundColor = .lightGray
-        xButton.setTitle("닫기", for: .normal)
-        xButton.layer.borderColor = UIColor.black.cgColor
-        xButton.layer.borderWidth = 5.0
-        xButton.layer.cornerRadius = 15
+        backButton.backgroundColor = .lightGray
+        backButton.setTitle("닫기", for: .normal)
+        backButton.layer.borderColor = UIColor.black.cgColor
+        backButton.layer.borderWidth = 5.0
+        backButton.layer.cornerRadius = 15
+        backButton.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         addButton.backgroundColor = .darkGray
         addButton.setTitle("위시리스트 추가", for: .normal)
         addButton.layer.borderColor = UIColor.black.cgColor
         addButton.layer.borderWidth = 5.0
         addButton.layer.cornerRadius = 15
+        addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         
-        verticalStackView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(30)
             make.bottom.equalTo(horizontalStackView.snp.top).offset(-30)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        imageView.snp.makeConstraints { make in
+            make.height.equalTo(400)
+        }
+        verticalStackView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(scrollView)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.width.equalTo(scrollView)
         }
         horizontalStackView.snp.makeConstraints { make in
             make.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
         }
+    }
+    
+    @objc func tapBackButton() {
+        ButtonManager.tapBackButton(viewController: self)
+    }
+    
+    @objc func tapAddButton() {
+        ButtonManager.tapAddButton(bookData: NetworkManager.bookList[MainViewModel.indexPathRow])
     }
     
 }

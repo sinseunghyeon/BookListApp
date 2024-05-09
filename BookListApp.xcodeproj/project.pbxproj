@@ -28,6 +28,9 @@
 		FFAFF3FB2BEBDE18004C5C8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFAFF3FA2BEBDE18004C5C8D /* Main.storyboard */; };
 		FFAFF3FD2BEC1E1C004C5C8D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF3FC2BEC1E1C004C5C8D /* DetailView.swift */; };
 		FFAFF3FF2BEC87F9004C5C8D /* CollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF3FE2BEC87F9004C5C8D /* CollectionViewCellDelegate.swift */; };
+		FFAFF4022BECCF74004C5C8D /* BookListApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4002BECCF74004C5C8D /* BookListApp.xcdatamodeld */; };
+		FFAFF4062BECD70A004C5C8D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */; };
+		FFAFF4082BECF6FC004C5C8D /* ButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		FFAFF3FA2BEBDE18004C5C8D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FFAFF3FC2BEC1E1C004C5C8D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		FFAFF3FE2BEC87F9004C5C8D /* CollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDelegate.swift; sourceTree = "<group>"; };
+		FFAFF4012BECCF74004C5C8D /* WishListData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WishListData.xcdatamodel; sourceTree = "<group>"; };
+		FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 			children = (
 				FFAFF3CB2BEA054A004C5C8D /* BookData.swift */,
 				FFAFF3E62BEAA391004C5C8D /* State.swift */,
+				FFAFF4002BECCF74004C5C8D /* BookListApp.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -127,6 +134,8 @@
 			children = (
 				FFAFF3F62BEB942F004C5C8D /* NetworkManager.swift */,
 				FFAFF3F82BEB9A69004C5C8D /* MainViewModel.swift */,
+				FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */,
+				FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,10 +223,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAFF4022BECCF74004C5C8D /* BookListApp.xcdatamodeld in Sources */,
 				FFAFF3B92BEA04A0004C5C8D /* ViewController.swift in Sources */,
 				FFAFF3FD2BEC1E1C004C5C8D /* DetailView.swift in Sources */,
 				FFAFF3B52BEA04A0004C5C8D /* AppDelegate.swift in Sources */,
 				FFAFF3FF2BEC87F9004C5C8D /* CollectionViewCellDelegate.swift in Sources */,
+				FFAFF4082BECF6FC004C5C8D /* ButtonManager.swift in Sources */,
 				FFAFF3F72BEB942F004C5C8D /* NetworkManager.swift in Sources */,
 				FFAFF3F52BEB7D3D004C5C8D /* WishListView.swift in Sources */,
 				FFAFF3E02BEA0B83004C5C8D /* CollectionViewCell.swift in Sources */,
@@ -226,6 +237,7 @@
 				FFAFF3F22BEAB6B8004C5C8D /* SearchListViewCell.swift in Sources */,
 				FFAFF3E72BEAA391004C5C8D /* State.swift in Sources */,
 				FFAFF3B72BEA04A0004C5C8D /* SceneDelegate.swift in Sources */,
+				FFAFF4062BECD70A004C5C8D /* CoreDataManager.swift in Sources */,
 				FFAFF3F92BEB9A6A004C5C8D /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +508,19 @@
 			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		FFAFF4002BECCF74004C5C8D /* BookListApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FFAFF4012BECCF74004C5C8D /* WishListData.xcdatamodel */,
+			);
+			currentVersion = FFAFF4012BECCF74004C5C8D /* WishListData.xcdatamodel */;
+			path = BookListApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FFAFF3A92BEA04A0004C5C8D /* Project object */;
 }
