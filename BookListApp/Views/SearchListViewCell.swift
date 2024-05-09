@@ -16,26 +16,39 @@ class SearchListViewCell: UICollectionViewCell {
     let titleLabel = UILabel()
     let authorLabel = UILabel()
     let priceLabel = UILabel()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.configureSearchListViewCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureSearchListViewCell() {
         contentView.addSubview(stackView)
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
+        stackView.spacing = 20
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(authorLabel)
         stackView.addArrangedSubview(priceLabel)
         
-        titleLabel.text = "어린왕자"
-        authorLabel.text = "생떽쥐뻬리"
-        priceLabel.text = "8000원"
+        titleLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        titleLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 750), for: .horizontal)
         
-        stackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview().inset(10)
+        authorLabel.font = .systemFont(ofSize: 12)
+        authorLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
+        authorLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 751), for: .horizontal)
+        
+        priceLabel.font = .systemFont(ofSize: 14)
+        priceLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 252), for: .horizontal)
+        priceLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 752), for: .horizontal)
+        
+        stackView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview().inset(10)
         }
     }
 

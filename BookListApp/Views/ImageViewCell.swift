@@ -19,6 +19,15 @@ class ImageViewCell: UICollectionViewCell {
         self.configureImageViewCell()
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configureImageViewCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func configureImageViewCell() {
         contentView.addSubview(imageView)
         

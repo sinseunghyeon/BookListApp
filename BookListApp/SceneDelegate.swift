@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // ViewController의 인스턴스를 생성하면서 layout을 전달합니다.
         let viewController = ViewController(collectionViewLayout: layout)
+        let wishListViewController = WishListView(collectionViewLayout: layout)
         
         // 탭바컨트롤러의 생성
         let tabBarVC = UITabBarController()
@@ -47,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 첫번째 화면은 네비게이션컨트롤러로 만들기 (기본루트뷰 설정)
         let vc1 = UINavigationController(rootViewController: viewController)
-        let vc2 = WishListView()
+        let vc2 = wishListViewController
         
         // 탭바 이름들 설정
         vc1.title = "Main"

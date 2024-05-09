@@ -1,0 +1,75 @@
+//
+//  DetailView.swift
+//  BookListApp
+//
+//  Created by t2023-m0056 on 5/9/24.
+//
+
+import UIKit
+
+class DetailView: UIViewController {
+    
+    let titleLabel = UILabel()
+    let authorLabel = UILabel()
+    let imageView = UIImageView()
+    let priceLabel = UILabel()
+    let descriptionLabel = UILabel()
+    let xButton = UIButton()
+    let addButton = UIButton()
+    let verticalStackView = UIStackView()
+    let horizontalStackView = UIStackView()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        self.configureDetailView()
+    }
+    
+    private func configureDetailView() {
+        view.addSubview(verticalStackView)
+        verticalStackView.axis = .vertical
+        verticalStackView.distribution = .equalSpacing
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(authorLabel)
+        verticalStackView.addArrangedSubview(imageView)
+        verticalStackView.addArrangedSubview(priceLabel)
+        verticalStackView.addArrangedSubview(descriptionLabel)
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textAlignment = .center
+        authorLabel.font = .systemFont(ofSize: 15)
+        authorLabel.textAlignment = .center
+        priceLabel.font = .systemFont(ofSize: 18)
+        priceLabel.textAlignment = .center
+        descriptionLabel.font = .systemFont(ofSize: 13)
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.numberOfLines = 0
+        
+        view.addSubview(horizontalStackView)
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.distribution = .fillEqually
+        horizontalStackView.spacing = 8
+        horizontalStackView.addArrangedSubview(xButton)
+        horizontalStackView.addArrangedSubview(addButton)
+        xButton.backgroundColor = .lightGray
+        xButton.setTitle("닫기", for: .normal)
+        xButton.layer.borderColor = UIColor.black.cgColor
+        xButton.layer.borderWidth = 5.0
+        xButton.layer.cornerRadius = 15
+        addButton.backgroundColor = .darkGray
+        addButton.setTitle("위시리스트 추가", for: .normal)
+        addButton.layer.borderColor = UIColor.black.cgColor
+        addButton.layer.borderWidth = 5.0
+        addButton.layer.cornerRadius = 15
+        
+        verticalStackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(30)
+            make.bottom.equalTo(horizontalStackView.snp.top).offset(-30)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        horizontalStackView.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
+        }
+    }
+    
+}

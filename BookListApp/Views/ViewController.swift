@@ -7,23 +7,44 @@
 
 import UIKit
 
+enum searchState {
+    case `default`
+    case searching
+}
+
 class ViewController: UICollectionViewController {
     
     static let identifier = "ViewController"
     
     let searchBar = UISearchBar()
+    var state: searchState = .default
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureCollectionView()
-        self.navigationItem.title = "BookListApp"
         self.configureSearchBar()
         self.configureNavigationBar()
+        self.executeNetwork(keyword: "베스트셀러")
+    }
+    
+    func executeNetwork(keyword: String) {
+        NetworkManager.shared.fetchBookList(keyword: keyword, completion: { result in
+            switch result {
+            case .success(let bookData):
+                NetworkManager.bookList = bookData
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        })
     }
     
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()  // 불투명으로
+        appearance.configureWithOpaqueBackground()
         
         navigationController?.navigationBar.tintColor = .systemGray6
         navigationController?.navigationBar.standardAppearance = appearance
@@ -43,7 +64,7 @@ class ViewController: UICollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(UINib(nibName: CollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -68,6 +89,8 @@ class ViewController: UICollectionViewController {
         cell.backgroundColor = .gray
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 5.0
+        
+        cell.delegate = self
         return cell
     }
 
@@ -84,39 +107,47 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: height)
         case 1:
             let width = collectionView.frame.width - 16
-            let height = collectionView.frame.height / 1.7
-            print(collectionView.frame.height)
+            let height = collectionView.frame.height / 1.71
+
             return CGSize(width: width, height: height)
         default:
             return CGSize(width: 100, height: 100)
         }
-        
-        
     }
 }
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        self.resultData.removeAll()
-//        
-//        for i in 0..<repositories.count {
-//            if repositories[i].getName().lowercased().contains(searchText.lowercased()) {
-//                self.resultData.append(repositories[i])
-//            }
-//        }
-//        if searchText.isEmpty {
-//            self.state = .default
-//        }
-//        collectionView.reloadData()
+        NetworkManager.searchDebounceTimer?.invalidate()
+        NetworkManager.searchDebounceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
+            if searchText.isEmpty {
+                self?.state = .default
+            } else {
+                self?.executeNetwork(keyword: searchText)
+            }
+        })
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-//        self.state = .search
+        self.state = .searching
         return true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        self.state = .default
+        self.state = .default
     }
 }
 
+extension ViewController: CollectionViewCellDelegate {
+    func didSelectItemAt(_ cell: CollectionViewCell, indexPath: IndexPath) {
+        let detailVC = DetailView()
+        detailVC.titleLabel.text = NetworkManager.bookList[indexPath.row].title
+        detailVC.authorLabel.text = NetworkManager.bookList[indexPath.row].authors.first
+        detailVC.priceLabel.text = "\(NetworkManager.bookList[indexPath.row].price)원"
+        detailVC.descriptionLabel.text = NetworkManager.bookList[indexPath.row].contents
+        detailVC.descriptionLabel.sizeToFit()
+        detailVC.modalPresentationStyle = .automatic
+        detailVC.modalTransitionStyle = .coverVertical
+        self.present(detailVC, animated: true, completion: nil)
+    }
+}
