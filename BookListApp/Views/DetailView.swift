@@ -19,7 +19,7 @@ class DetailView: UIViewController {
     let scrollView = UIScrollView()
     let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -91,7 +91,7 @@ class DetailView: UIViewController {
     }
     
     @objc func tapAddButton() {
-        ButtonManager.tapAddButton(bookData: NetworkManager.bookList[MainViewModel.indexPathRow])
+        ButtonManager.tapAddButton(bookData: NetworkManager.bookList[MainViewModel.indexPathRow], viewController: self)
     }
     
 }

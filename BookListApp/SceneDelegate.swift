@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 탭바컨트롤러의 생성
         let tabBarVC = UITabBarController()
+        tabBarVC.delegate = self
         if #available(iOS 13.0, *) {
             let appearance = UITabBarAppearance()
             appearance.stackedLayoutAppearance.selected.iconColor = .black // 선택된 아이템의 아이콘 색상
@@ -102,3 +103,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // 선택된 뷰 컨트롤러가 UINavigationController인 경우
+        if let navController = viewController as? UINavigationController,
+           // UINavigationController의 topViewController가 WishListViewController인지 확인
+           let wishListVC = navController.topViewController as? WishListView {
+            // collectionView의 데이터를 새로고침
+            wishListVC.collectionView.reloadData()
+        } else if let wishListVC = viewController as? WishListView {
+            wishListVC.collectionView.reloadData()
+        }
+    }
+}

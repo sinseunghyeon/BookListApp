@@ -91,11 +91,14 @@ extension CollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageViewCell.identifier, for: indexPath) as? ImageViewCell else {
                 return UICollectionViewCell()
             }
-            
+            MainViewModel.setRecentArray()
             cell.layer.cornerRadius = cell.frame.width / 2
             cell.layer.masksToBounds = true
             cell.backgroundColor = .white
             cell.layer.borderWidth = 2.0
+            if !MainViewModel.recentArray.isEmpty {
+                NetworkManager.shared.excuteKingFisher(url: MainViewModel.recentArray[indexPath.row].thumbnail, imageView: cell.imageView)
+            }
             
             return cell
         case .searchResultBooks:

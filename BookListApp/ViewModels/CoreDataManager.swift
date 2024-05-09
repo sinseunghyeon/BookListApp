@@ -10,7 +10,7 @@ import UIKit
 
 class CoreDataManager {
     static let shared = CoreDataManager()
-    static let wishListDatas: [WishListData] = shared.readData()
+    static var wishListDatas: [WishListData] = []
     
     private init() { }
     
@@ -38,20 +38,19 @@ class CoreDataManager {
         }
     }
     
-    func readData() -> [WishListData] {
+    func readData() {
         guard let context = self.persistentContainer?.viewContext else {
             print("Error: Can't access Core Data view context")
-            return []
+            return
         }
         
         let request = WishListData.fetchRequest()
         
         do {
             let wishListDatas = try context.fetch(request)
-            return wishListDatas
+            CoreDataManager.wishListDatas = wishListDatas
         } catch {
             print("Error fetching data from CoreData: \(error.localizedDescription)")
-            return []
         }
     }
     

@@ -31,6 +31,7 @@
 		FFAFF4022BECCF74004C5C8D /* BookListApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4002BECCF74004C5C8D /* BookListApp.xcdatamodeld */; };
 		FFAFF4062BECD70A004C5C8D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */; };
 		FFAFF4082BECF6FC004C5C8D /* ButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */; };
+		FFAFF40B2BED5BC1004C5C8D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = FFAFF40A2BED5BC1004C5C8D /* Toast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAFF40B2BED5BC1004C5C8D /* Toast in Frameworks */,
 				FFAFF3CF2BEA065B004C5C8D /* Kingfisher in Frameworks */,
 				FFAFF3D72BEA067E004C5C8D /* Alamofire in Frameworks */,
 				FFAFF3D92BEA067E004C5C8D /* AlamofireDynamic in Frameworks */,
@@ -162,6 +164,7 @@
 				FFAFF3D32BEA0669004C5C8D /* SnapKit-Dynamic */,
 				FFAFF3D62BEA067E004C5C8D /* Alamofire */,
 				FFAFF3D82BEA067E004C5C8D /* AlamofireDynamic */,
+				FFAFF40A2BED5BC1004C5C8D /* Toast */,
 			);
 			productName = BookListApp;
 			productReference = FFAFF3B12BEA04A0004C5C8D /* BookListApp.app */;
@@ -195,6 +198,7 @@
 				FFAFF3CD2BEA065B004C5C8D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				FFAFF3D02BEA0669004C5C8D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FFAFF3D52BEA067E004C5C8D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				FFAFF4092BED5BC1004C5C8D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = FFAFF3B22BEA04A0004C5C8D /* Products */;
 			projectDirPath = "";
@@ -479,6 +483,14 @@
 				version = 5.9.1;
 			};
 		};
+		FFAFF4092BED5BC1004C5C8D /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -506,6 +518,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FFAFF3D52BEA067E004C5C8D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
+		};
+		FFAFF40A2BED5BC1004C5C8D /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFAFF4092BED5BC1004C5C8D /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 

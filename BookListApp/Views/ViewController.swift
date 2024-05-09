@@ -18,7 +18,6 @@ class ViewController: UICollectionViewController {
     
     let searchBar = UISearchBar()
     var state: searchState = .default
-    let mainViewModel = MainViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +134,8 @@ extension ViewController: CollectionViewCellDelegate {
     func didSelectItemAt(_ cell: CollectionViewCell, indexPath: IndexPath) {
         let detailVC = DetailView()
         MainViewModel.indexPathRow = indexPath.row
+        MainViewModel.recentArray.append(NetworkManager.bookList[indexPath.row])
+//        MainViewModel.defaults.set(MainViewModel.recentArray, forKey: "recentSelectBook")
         detailVC.titleLabel.text = NetworkManager.bookList[indexPath.row].title
         detailVC.authorLabel.text = NetworkManager.bookList[indexPath.row].authors.first
         NetworkManager.shared.excuteKingFisher(url: NetworkManager.bookList[indexPath.row].thumbnail, imageView: detailVC.imageView)

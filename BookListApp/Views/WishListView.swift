@@ -16,6 +16,7 @@ class WishListView: UICollectionViewController {
         super.viewDidLoad()
         self.configureCollectionView()
         self.setupLongPressGesture()
+        CoreDataManager.shared.readData()
     }
 
     private func configureCollectionView() {

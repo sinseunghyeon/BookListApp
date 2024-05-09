@@ -13,11 +13,6 @@ class ImageViewCell: UICollectionViewCell {
     static let identifier = "ImageViewCell"
     
     let imageView = UIImageView()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.configureImageViewCell()
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +25,8 @@ class ImageViewCell: UICollectionViewCell {
     
     private func configureImageViewCell() {
         contentView.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
