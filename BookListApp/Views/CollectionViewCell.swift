@@ -79,7 +79,7 @@ extension CollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch state {
         case .recentTappedBooks:
-            return 10
+            return MainViewModel.recentBooks.count
         case .searchResultBooks:
             return NetworkManager.bookList.count
         }
@@ -91,14 +91,12 @@ extension CollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageViewCell.identifier, for: indexPath) as? ImageViewCell else {
                 return UICollectionViewCell()
             }
-            MainViewModel.setRecentArray()
+            let book = MainViewModel.recentBooks[indexPath.row]
+            NetworkManager.shared.excuteKingFisher(url: book.thumbnail, imageView: cell.imageView)
             cell.layer.cornerRadius = cell.frame.width / 2
             cell.layer.masksToBounds = true
             cell.backgroundColor = .white
             cell.layer.borderWidth = 2.0
-            if !MainViewModel.recentArray.isEmpty {
-                NetworkManager.shared.excuteKingFisher(url: MainViewModel.recentArray[indexPath.row].thumbnail, imageView: cell.imageView)
-            }
             
             return cell
         case .searchResultBooks:
@@ -130,6 +128,13 @@ extension CollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch state {
+        case .recentTappedBooks:
+            break
+        case .searchResultBooks:
+            let selectedBook = NetworkManager.bookList[indexPath.row]
+            MainViewModel.addRecentBook(selectedBook)
+        }
         delegate?.didSelectItemAt(self, indexPath: indexPath)
     }
 }

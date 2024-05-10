@@ -87,11 +87,11 @@ class DetailView: UIViewController {
     }
     
     @objc func tapBackButton() {
-        ButtonManager.tapBackButton(viewController: self)
+        ButtonManager.tapBackButton(viewController: self, mainView: MainViewModel.mainView)
     }
     
     @objc func tapAddButton() {
-        ButtonManager.tapAddButton(bookData: NetworkManager.bookList[MainViewModel.indexPathRow], viewController: self)
+        ButtonManager.tapAddButton(bookData: NetworkManager.bookList[MainViewModel.indexPathRow], viewController: self, mainView: MainViewModel.mainView)
     }
     
 }

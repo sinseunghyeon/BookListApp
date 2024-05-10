@@ -32,6 +32,7 @@
 		FFAFF4062BECD70A004C5C8D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */; };
 		FFAFF4082BECF6FC004C5C8D /* ButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */; };
 		FFAFF40B2BED5BC1004C5C8D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = FFAFF40A2BED5BC1004C5C8D /* Toast */; };
+		FFAFF40D2BEDC460004C5C8D /* ModalViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAFF40C2BEDC460004C5C8D /* ModalViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		FFAFF4012BECCF74004C5C8D /* WishListData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WishListData.xcdatamodel; sourceTree = "<group>"; };
 		FFAFF4052BECD70A004C5C8D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FFAFF4072BECF6FC004C5C8D /* ButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonManager.swift; sourceTree = "<group>"; };
+		FFAFF40C2BEDC460004C5C8D /* ModalViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				FFAFF3F42BEB7D3D004C5C8D /* WishListView.swift */,
 				FFAFF3FC2BEC1E1C004C5C8D /* DetailView.swift */,
 				FFAFF3FE2BEC87F9004C5C8D /* CollectionViewCellDelegate.swift */,
+				FFAFF40C2BEDC460004C5C8D /* ModalViewControllerDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				FFAFF3CC2BEA054A004C5C8D /* BookData.swift in Sources */,
 				FFAFF3E42BEA466D004C5C8D /* ImageViewCell.swift in Sources */,
 				FFAFF3F22BEAB6B8004C5C8D /* SearchListViewCell.swift in Sources */,
+				FFAFF40D2BEDC460004C5C8D /* ModalViewControllerDelegate.swift in Sources */,
 				FFAFF3E72BEAA391004C5C8D /* State.swift in Sources */,
 				FFAFF3B72BEA04A0004C5C8D /* SceneDelegate.swift in Sources */,
 				FFAFF4062BECD70A004C5C8D /* CoreDataManager.swift in Sources */,

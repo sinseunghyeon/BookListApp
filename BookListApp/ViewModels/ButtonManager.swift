@@ -9,20 +9,23 @@ import Toast
 import UIKit
 
 class ButtonManager {
-    static func tapBackButton(viewController: UIViewController) {
+    weak var delegate: ModalViewControllerDelegate?
+    
+    static func tapBackButton(viewController: UIViewController, mainView: UICollectionViewController) {
         print("뒤로 이동")
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: true, completion: {
+            mainView.collectionView.reloadData()
+        })
     }
     
-    static func tapAddButton(bookData: BookData, viewController: UIViewController) {
+    static func tapAddButton(bookData: BookData, viewController: UIViewController, mainView: UICollectionViewController) {
         print("위시리스트 추가")
         CoreDataManager.shared.createCoreData(bookData: bookData)
         CoreDataManager.shared.readData()
         viewController.dismiss(animated: true, completion: {
             // 모달이 완전히 닫힌 후에 실행됩니다.
-            if let parentView = viewController.presentingViewController?.view {
-                parentView.makeToast("위시리스트에 추가했습니다", duration: 1.5, position: .center)
-            }
+            mainView.collectionView.reloadData()
+            mainView.collectionView.makeToast("위시리스트에 추가함", duration: 1.5)
         })
         
     }

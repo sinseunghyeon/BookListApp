@@ -53,7 +53,7 @@ class ViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return MainViewModel.recentBooks.isEmpty ? 1 : 2
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -61,16 +61,21 @@ class ViewController: UICollectionViewController {
             return UICollectionViewCell()
         }
         
-        switch indexPath.row {
-        case 0:
-            cell.headLabel.text = "최근 본 책"
-            cell.state = .recentTappedBooks
-        case 1:
+        if MainViewModel.recentBooks.isEmpty {
+            // recentBooks가 비었을 때, 검색 결과 셀만 표시
             cell.headLabel.text = "검색 결과"
             cell.state = .searchResultBooks
-        default:
-            return UICollectionViewCell()
+        } else {
+            // recentBooks가 비어있지 않을 때
+            if indexPath.row == 0 {
+                cell.headLabel.text = "최근 본 책"
+                cell.state = .recentTappedBooks
+            } else if indexPath.row == 1 {
+                cell.headLabel.text = "검색 결과"
+                cell.state = .searchResultBooks
+            }
         }
+        
         cell.backgroundColor = .gray
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 5.0
@@ -83,20 +88,26 @@ class ViewController: UICollectionViewController {
 extension ViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.row {
-        case 0:
+        if MainViewModel.recentBooks.isEmpty {
             let width = collectionView.frame.width - 16
-            let height = collectionView.frame.height / 5.7
-            
-            return CGSize(width: width, height: height)
-        case 1:
-            let width = collectionView.frame.width - 16
-            let height = collectionView.frame.height / 1.71
+            let height = collectionView.frame.height / 1.3
 
             return CGSize(width: width, height: height)
-        default:
-            return CGSize(width: 100, height: 100)
+        } else {
+            // recentBooks가 비어있지 않을 때
+            if indexPath.row == 0 {
+                let width = collectionView.frame.width - 16
+                let height = collectionView.frame.height / 5.7
+                
+                return CGSize(width: width, height: height)
+            } else if indexPath.row == 1 {
+                let width = collectionView.frame.width - 16
+                let height = collectionView.frame.height / 1.71
+
+                return CGSize(width: width, height: height)
+            }
         }
+        return CGSize()
     }
 }
 
@@ -134,8 +145,7 @@ extension ViewController: CollectionViewCellDelegate {
     func didSelectItemAt(_ cell: CollectionViewCell, indexPath: IndexPath) {
         let detailVC = DetailView()
         MainViewModel.indexPathRow = indexPath.row
-        MainViewModel.recentArray.append(NetworkManager.bookList[indexPath.row])
-//        MainViewModel.defaults.set(MainViewModel.recentArray, forKey: "recentSelectBook")
+        MainViewModel.mainView = self
         detailVC.titleLabel.text = NetworkManager.bookList[indexPath.row].title
         detailVC.authorLabel.text = NetworkManager.bookList[indexPath.row].authors.first
         NetworkManager.shared.excuteKingFisher(url: NetworkManager.bookList[indexPath.row].thumbnail, imageView: detailVC.imageView)
@@ -145,5 +155,11 @@ extension ViewController: CollectionViewCellDelegate {
         detailVC.modalPresentationStyle = .automatic
         detailVC.modalTransitionStyle = .coverVertical
         self.present(detailVC, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: ModalViewControllerDelegate {
+    func modalViewControllerDidDismiss() {
+        collectionView.reloadData()
     }
 }
